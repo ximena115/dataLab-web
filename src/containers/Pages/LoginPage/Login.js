@@ -38,22 +38,7 @@ class LoginPage extends React.Component {
             this.setState({ loading: true });
             const response = await makeLogin(email, password);
             if(response){
-                const { role, token, expiration, name, Office } = response;
-                localStorage.removeItem("Auth");
-                localStorage.setItem(
-                    "Auth",
-                    JSON.stringify({ Token: token, Expiration: expiration })
-                );
-                this.props.loginSuccess(role, expiration, 1, name, Office.id);
-                this.setState({ loading: false });
-                let ViewRedirect = "inicio";
-                if (role === "SuperAdmin" || role === "Admin" || role === "AdminOficina" || role === "Despachador" ) {
-                    this.setState({ redirect: true, redirectTo: ViewRedirect });
-                }
-                if (role === "Domiciliario") {
-                    ViewRedirect = "ordenes";
-                    this.setState({ redirect: true, redirectTo: ViewRedirect });
-                }
+                console.log(response);
             } else {
                 this.setState({ loading: false });
                 Swal.fire({
